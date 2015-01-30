@@ -2,10 +2,8 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Project Name
-project(Valkyrie)
-
-# C++11
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 -m64")
+project(GameWrapper)
+set(OutputName "GameWrapper.app")
 
 # Build Directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/Build)
@@ -45,31 +43,31 @@ option(GLFW_BUILD_TESTS "Setting GLFW Tests OFF" OFF)
 option(GLFW_BUILD_DOCS "Settings GLFW Docs OFF" OFF)
 
 # Standard Include
-include_directories(${PROJECT_SOURCE_DIR}/Valkyrie)
+include_directories(${PROJECT_SOURCE_DIR}/GameWrapper)
 
 # Set Source
-set(Game ${PROJECT_SOURCE_DIR}/Valkyrie)
-set(GameHeaders ${Game}/Main.hpp)
-set(GameSources ${Game}/Main.cpp)
+set(Wrap ${PROJECT_SOURCE_DIR}/GameWrapper)
+set(WrapperHeaders ${Wrap}/Main.hpp)
+set(WrapperSources ${Wrap}/Main.cpp)
 
 # Standard Includes
-list(APPEND GameHeaders ${Game}/Includes.hpp)
+list(APPEND GameHeaders ${Wrap}/Includes.hpp)
 
 # NordicEngine
-link_directories(${Game}/NordicEngine)
-include_directories(${Game}/NordicEngine)
-add_subdirectory(${Game}/NordicEngine)
+link_directories(${Wrap}/NordicEngine)
+include_directories(${Wrap}/NordicEngine)
+add_subdirectory(${Wrap}/NordicEngine)
 
 # Game
-link_directories(${Game}/Game)
-include_directories(${Game}/Game)
-add_subdirectory(${Game}/Game)
+link_directories(${Wrap}/Game)
+include_directories(${Wrap}/Game)
+add_subdirectory(${Wrap}/Game)
 
 # Compile
-add_executable(Valkyrie ${GameSources} ${GameHeaders})
-set_target_properties(Valkyrie PROPERTIES LINKER_LANGUAGE CXX)
-set_target_properties(Valkyrie PROPERTIES OUTPUT_NAME "Valkyrie.app")
+add_executable(GameWrapper ${WrapperSources} ${WrapperHeaders})
+set_target_properties(GameWrapper PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(GameWrapper PROPERTIES OUTPUT_NAME ${OutputName})
 
 # Link
-target_link_libraries(Valkyrie NordicEngine)
-target_link_libraries(Valkyrie GameLib)
+target_link_libraries(GameWrapper NordicEngine)
+target_link_libraries(GameWrapper GameLib)
