@@ -70,4 +70,4 @@ set_target_properties(GameWrapper PROPERTIES OUTPUT_NAME ${OutputName})
 
 # Link
 target_link_libraries(GameWrapper NordicEngine)
-target_link_libraries(GameWrapper GameLib)
+target_link_libraries(GameWrapper GameLibrary)
