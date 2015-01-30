@@ -4,7 +4,7 @@
 
 namespace NordicArts {
     int Main() {
-        return Game::Main();
+        return Game::Main("Valkyrie");
     }
 };
 
