@@ -103,7 +103,7 @@ if [[ $OPT == "run" ]]; then
         
     cd Build
     cp -r ../GameFiles .
-    ./Valkyrie.app
+    ./GameWrapper.app
 fi
 
 export CC=$oldCC
