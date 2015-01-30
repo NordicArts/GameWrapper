@@ -1,0 +1,4 @@
+#ifndef NordicArts_GameWrapper_Includes_H
+#define NordicArts_GameWrapper_Includes_H
+
+#endif
