@@ -53,6 +53,9 @@ set(WrapperSources ${Wrap}/Main.cpp)
 # Standard Includes
 list(APPEND GameHeaders ${Wrap}/Includes.hpp)
 
+# Build Number
+list(APPEND GameHeaders ${Wrap}/buildNumber.hpp)
+
 # NordicEngine
 link_directories(${Wrap}/NordicEngine)
 include_directories(${Wrap}/NordicEngine)
