@@ -19,6 +19,7 @@ OPTIONS:
     -h  Show this message
     -v  Verbose
     -o  Option, can be 'run', 'rebuild', 'run' or 'pull' [default: run]
+    -n  No Clean
 EOF
 }
 
@@ -53,12 +54,16 @@ pullCode()
 OPT="run"
 VERBOSE=false
 PULL=false
+CLEAN=1
 
-while getopts ":o:vhp?" OPTION
+while getopts ":o:vhnp?" OPTION
 do
     case $OPTION in
         o)
             OPT=$OPTARG
+            ;;
+        n)
+            CLEAN=false
             ;;
         p)
             PULL=1
@@ -83,23 +88,33 @@ fi
 if [[ $OPT == "build" ]]; then
     makeIt $VERBOSE
 
-    ./cleaner.sh -t cmake
+    if [[ $CLEAN == 1 ]]; then
+        ./cleaner.sh -t cmake
+    fi
 fi
 
 if [[ $OPT == "rebuild" ]]; then
-    ./cleaner.sh -t all
+    if [[ $CLEAN == 1 ]]; then
+        ./cleaner.sh -t all
+    fi
 
     makeIt $VERBOSE
 
-    ./cleaner.sh -t cmake
+    if [[ $CLEAN == 1 ]]; then
+        ./cleaner.sh -t cmake
+    fi
 fi
 
 if [[ $OPT == "run" ]]; then
-    ./cleaner.sh -t all
+    if [[ $CLEAN == 1 ]]; then
+        ./cleaner.sh -t all
+    fi
 
     makeIt $VERBOSE
 
-    ./cleaner.sh -t cmake
+    if [[ $CLEAN == 1 ]]; then
+        ./cleaner.sh -t cmake
+    fi
         
     cd Build
     cp -r ../GameFiles .
