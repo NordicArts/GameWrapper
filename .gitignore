@@ -16,3 +16,5 @@ UnitTests.app
 *.dylib
 lib/
 Build/
+Makefile
+
