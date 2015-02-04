@@ -17,4 +17,5 @@ UnitTests.app
 lib/
 Build/
 Makefile
+.idea/
 
