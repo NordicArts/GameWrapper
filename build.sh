@@ -81,12 +81,13 @@ buildNumber()
     echo -e $l3 >> $buildName/buildNumber.hpp
 }
 
+GAMENAME="Valkyrie"
 OPT="run"
 VERBOSE=false
 PULL=false
 CLEAN=1
 
-while getopts ":o:vhnp?" OPTION
+while getopts ":o:g:vhnp?" OPTION
 do
     case $OPTION in
         o)
@@ -105,11 +106,20 @@ do
         v)
             VERBOSE=1
             ;;
+        g)
+            GAMENAME=$OPTARG
+            ;;
     esac
 done
 
 # Clear window
 clear
+
+# Remove the GameLink and make the one in the gamename
+cd GameWrapper
+rm -rf Game
+ln -s ../../$GAMENAME Game
+cd ../
 
 if [[ $PULL == 1 ]]; then
     pullCode $VERBOSE
@@ -151,7 +161,11 @@ if [[ $OPT == "run" ]]; then
     fi
         
     cd Build
-    cp -r ../GameFiles .
+    if [[ -d ../../$GAMENAME/GameFiles ]]; then
+        cp -r ../../$GAMENAME/GameFiles .
+    else
+        cp -r ../GameFiles .
+    fi
     ./GameWrapper.app
 fi
 
