@@ -1,3 +1,3 @@
 #ifndef NORDICARTS_GameWrapper_BUILDNUMBER
-#define NORDICARTS_GameWrapper_BUILDNUMBER 156
+#define NORDICARTS_GameWrapper_BUILDNUMBER 166
 #endif
